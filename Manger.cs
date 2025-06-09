@@ -19,11 +19,18 @@ namespace MalshinonProject
 
         public void SetName()
         {
-            Console.WriteLine("Enter Your first name: ");
-            string FN = Console.ReadLine();
-            Console.WriteLine("please  enter ypur last name: ");
-            string LN = Console.ReadLine();
-            new Person(FN, LN);
+            try
+            {
+                Console.WriteLine("Enter Your first name: ");
+                string FN = Console.ReadLine();
+                Console.WriteLine("please  enter ypur last name: ");
+                string LN = Console.ReadLine();
+                new Person(FN, LN);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"genral error: {ex}");
+            }
         }
     }
 }
