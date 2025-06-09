@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ZstdSharp.Unsafe;
 
 namespace MalshinonProject
 {
@@ -36,7 +37,28 @@ namespace MalshinonProject
 
         }
 
-        
+
+        public string GetFirstName()
+        {
+            return FirstName;
+        }
+
+        public string GetLastName()
+        {
+            return LastName;
+        }
+
+        public string GetSecretCode()
+        {
+            return SecretCode;
+        }
+
+        public new string GetType()
+        {
+            return Type;
+        }
+
+
     }
 
     
