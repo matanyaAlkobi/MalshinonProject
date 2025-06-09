@@ -14,7 +14,7 @@ namespace MalshinonProject
 
         private readonly string connStr = "server=localhost;user=root;password=;database=Malshinon";
 
-
+        //  Method for adding a person to the people table
         public static void AddPerson(Person person)
         {
             string connectionString = "server=localhost;user=root;password=;database=eagleeyedb";
@@ -49,6 +49,7 @@ namespace MalshinonProject
 
         }
 
+        // Method for searching for people in a database
         public bool SearchForAPerson(string FirstName, string LastName)
         {
             string Query = "SELECT 1 " +
