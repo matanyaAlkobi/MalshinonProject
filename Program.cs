@@ -15,8 +15,16 @@ namespace MalshinonProject
             //Manger maneger = new Manger();
             //maneger.Start();
 
-            PepoleDAL p1 = new PepoleDAL();
-            Console.WriteLine( p1.SearchForAPerson("matan", "alkobi"));
+            //PepoleDAL p1 = new PepoleDAL();
+            //Console.WriteLine( PepoleDAL.SearchForAPerson("matan", "alkobi"));
+
+            //Person ff = new Person("matan", "alkobi");
+            //PepoleDAL p1 = new PepoleDAL();
+            //PepoleDAL.AddPerson(ff);
+
+
         }
     }
+
+    
 }
