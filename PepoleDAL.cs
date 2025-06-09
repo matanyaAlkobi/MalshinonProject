@@ -17,13 +17,13 @@ namespace MalshinonProject
         //  Method for adding a person to the people table
         public static void AddPerson(Person person)
         {
-            string connectionString = "server=localhost;user=root;password=;database=eagleeyedb";
+            string connectionString = "Server=localhost; database=Malshinon; UID=root; password=";
             try
             {
                 using (var connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
-                    string query = "INSERT INTO Pepole (FirstName, LastName, SecretCode, Type) VALUES (@FirstName,@LastName, @SecretCode, @Type)";
+                    string query = "INSERT INTO People (FirstName, LastName, SecretCode, Type) VALUES (@FirstName,@LastName, @SecretCode, @Type)";
                     using (var cmd = new MySqlCommand(query, connection))
                     {
 
@@ -50,30 +50,26 @@ namespace MalshinonProject
         }
 
         // Method for searching for people in a database
-        public bool SearchForAPerson(string FirstName, string LastName)
+        public static bool SearchForAPerson(string FirstName, string LastName)
         {
             string Query = "SELECT 1 " +
                 "FROM  people " +
                 "WHERE FirstName = @FN and LastName = @LN LIMIT 1";
 
-            string connstring = "Server=127.0.0.1; database=Malshinon; UID=root; password=";
+            string connstring = "Server=localhost; database=Malshinon; UID=root; password=";
             try
             {
                 using (var connection = new MySqlConnection(connstring))
                 {
-
                     connection.Open();
                     using (var cmd = new MySqlCommand(Query, connection))
-                    
                     {
                         cmd.Parameters.AddWithValue("@FN",FirstName);
                         cmd.Parameters.AddWithValue("@LN", LastName);
                         using (var reader = cmd.ExecuteReader())
                         {
-
                             return reader.HasRows;
                         }
-
 
                     }
                 }
