@@ -13,14 +13,13 @@ namespace MalshinonProject
 {
     internal class Manger
     {
-
+        private string FN;
+        string LN;
         // System activation
         public void Start()
         {
-            Console.WriteLine("Enter Your first name: ");
-            string FN = Console.ReadLine();
-            Console.WriteLine("please  enter ypur last name: ");
-            string LN = Console.ReadLine();
+            SetFirstName();
+            SetLastName();
             if (!MalshinonDAL.SearchForAPerson(FN, LN))
             {
                 MalshinonDAL.AddPerson(new Person(FN, LN));
@@ -122,6 +121,41 @@ namespace MalshinonProject
             }
             List<string> FNandLN = new List<string> { FirstName, FullNameList[FullNameList.Count-1] };
             return FNandLN;
+        }
+
+
+        private void SetFirstName()
+        {
+            do
+            {
+                Console.WriteLine("Enter Your first name: ");
+                this.FN = Console.ReadLine();
+                if(FN == "")
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Error!! Please enter the first name again. ");
+                    Console.ResetColor();
+                }
+
+            }
+            while (FN == "");
+        }
+
+        private void SetLastName()
+        {
+            do
+            {
+                Console.WriteLine("Enter Your first name: ");
+                this.LN = Console.ReadLine();
+                if (LN == "")
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Error!! Please enter the last name again. ");
+                    Console.ResetColor();
+                }
+
+            }
+            while (LN == "");
         }
     }
 }

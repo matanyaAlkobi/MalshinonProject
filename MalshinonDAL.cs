@@ -16,6 +16,7 @@ namespace MalshinonProject
 
         //private readonly string connStr = "server=localhost;user=root;password=;database=Malshinon";
 
+
         //  Method for adding a person to the people table
         public static void AddPerson(Person person)
         {
@@ -319,6 +320,7 @@ namespace MalshinonProject
             }
         }
 
+
         public static void IncreasingNumReportByOne(int NumReports)
         {
             string connectionString = "Server=localhost; database=Malshinon; UID=root; password=";
@@ -345,8 +347,35 @@ namespace MalshinonProject
                 Console.WriteLine("General Error: " + ex.Message);
             }
         }
+
+        public static void IncreasingNumMentionByOne(int NumReports)
+        {
+            string connectionString = "Server=localhost; database=Malshinon; UID=root; password=";
+            try
+            {
+                using (var connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();
+                    string query = "INSERT INTO People (NumMentions) VALUES (@NumMentions)";
+                    using (var cmd = new MySqlCommand(query, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@NumMentions", NumReports + 1);
+                    }
+                }
+                Console.WriteLine("NumMentions increased by one successfully");
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("MySQL Error: " + ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("General Error: " + ex.Message);
+            }
+        }
+
+
     }
-    
 
 }
 
