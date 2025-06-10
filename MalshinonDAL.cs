@@ -34,7 +34,8 @@ namespace MalshinonProject
                         cmd.Parameters.AddWithValue("@LastName", person.GetLastName());
                         cmd.Parameters.AddWithValue("@SecretCode", person.GetSecretCode());
                         cmd.Parameters.AddWithValue("@Type", person.GetType());
-                        cmd.ExecuteNonQuery();
+                        int Execution = cmd.ExecuteNonQuery();  // צריך  לטפל
+
                     }
                 }
                 Console.WriteLine("person added successfully");
