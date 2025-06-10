@@ -24,6 +24,10 @@ namespace MalshinonProject
             {
                 MalshinonDAL.AddPerson(new Person(FN, LN));
             }
+            else if (MalshinonDAL.GetTypeByName(FN) == "Targt")
+            {
+
+            }
             string Report = SetIntelReport();
             List<string> targetFullNameList = SearchForTheName(Report);
             List<string> FNandLN = ExtractsFirstNameAndLastName(targetFullNameList);

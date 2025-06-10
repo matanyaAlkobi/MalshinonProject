@@ -161,6 +161,50 @@ namespace MalshinonProject
 
         //}
 
+
+        //  A method that displays status by name search
+        public static string GetTypeByName(string FirstName)
+        {
+            string Query = "SELECT Type " +
+                            "FROM  people " +
+                            "WHERE FirstName = @FN LIMIT 1";
+
+            string connstring = "Server=localhost; database=Malshinon; UID=root; password=";
+            try
+            {
+                using (var connection = new MySqlConnection(connstring))
+                {
+                    connection.Open();
+                    using (var cmd = new MySqlCommand(Query, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@FN", FirstName);
+                        using (var reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                return reader.GetString("Type");
+                            }
+                            return "";
+                        }
+                    }
+                }
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("MySQL Error: " + ex.Message);
+                return "";
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("General Error: " + ex.Message);
+                return "";
+            }
+        }
+
+
+
+
+
     }
 }
 
