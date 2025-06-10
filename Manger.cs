@@ -24,6 +24,7 @@ namespace MalshinonProject
             {
                 MalshinonDAL.AddPerson(new Person(FN, LN));
             }
+            //else if ()
             string Report = SetIntelReport();
             List<string> targetFullNameList = SearchForTheName(Report);
             List<string> FNandLN = ExtractsFirstNameAndLastName(targetFullNameList);
@@ -31,10 +32,10 @@ namespace MalshinonProject
             {
                 MalshinonDAL.AddPerson(new Person(FNandLN[0], FNandLN[1],"Target"));
             }
-            else if (MalshinonDAL.SearchForAPerson(FNandLN[0], FNandLN[1]) %% )
-            {
+            //else if (MalshinonDAL.SearchForAPerson(FNandLN[0], FNandLN[1]) %% )
+            //{
 
-            }
+            //}
         }
 
         // Requests information and returns the agent's name

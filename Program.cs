@@ -23,7 +23,7 @@ namespace MalshinonProject
 
             //PepoleDAL.AddPerson(ff);
 
-            Console.WriteLine(MalshinonDAL.GetAPersonID("tre"));
+            Console.WriteLine(MalshinonDAL.GetTypeByName("tre"));
 
 
 
