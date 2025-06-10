@@ -14,6 +14,7 @@ namespace MalshinonProject
     internal class Manger
     {
 
+        // System activation
         public void Start()
         {
             Console.WriteLine("Enter Your first name: ");
@@ -26,20 +27,28 @@ namespace MalshinonProject
             }
             else if (MalshinonDAL.GetTypeByName(FN) == "Targt")
             {
-
+                MalshinonDAL.ChangeTypeByNameSearch(FN,"Both");
             }
+
             string Report = SetIntelReport();
             List<string> targetFullNameList = SearchForTheName(Report);
             List<string> FNandLN = ExtractsFirstNameAndLastName(targetFullNameList);
             if (!MalshinonDAL.SearchForAPerson(FNandLN[0], FNandLN[1]))
             {
-                MalshinonDAL.AddPerson(new Person(FNandLN[0], FNandLN[1],"Target"));
+                MalshinonDAL.AddPerson(new Person(FNandLN[0], FNandLN[1], "Target"));
             }
-            //else if (MalshinonDAL.SearchForAPerson(FNandLN[0], FNandLN[1]) %% )
-            //{
+            else if (MalshinonDAL.GetTypeByName(FNandLN[0]) == "Reporter")
+            {
+                MalshinonDAL.ChangeTypeByNameSearch(FNandLN[0], "Both");
+            }
+            int ReporterID  = MalshinonDAL.GetAPersonID(FN);
+            int TargetID  = MalshinonDAL.GetAPersonID(FN);
 
-            //}
+
         }
+
+
+
 
         // Requests information and returns the agent's name
         private string SetIntelReport()

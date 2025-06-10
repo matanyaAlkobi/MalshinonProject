@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Google.Protobuf.Compiler;
 using ZstdSharp.Unsafe;
 
 namespace MalshinonProject
@@ -56,8 +57,14 @@ namespace MalshinonProject
             return Type;
         }
 
+        public static string MakeAFirstLetterCapital(string text)
+        {
+            text.ToLower();
+            char FirstLetterUpper = char.ToUpper(text[0]);
+            string NewText = FirstLetterUpper.ToString() + text.Substring(1);
+            return NewText;
+        }
         
-
 
     }
 
