@@ -65,7 +65,7 @@ namespace MalshinonProject
                     connection.Open();
                     using (var cmd = new MySqlCommand(Query, connection))
                     {
-                        cmd.Parameters.AddWithValue("@FN",FirstName);
+                        cmd.Parameters.AddWithValue("@FN", FirstName);
                         cmd.Parameters.AddWithValue("@LN", LastName);
                         using (var reader = cmd.ExecuteReader())
                         {
@@ -89,7 +89,7 @@ namespace MalshinonProject
         // A method that receiving a first name and returns the person's ID.
         public static int GetAPersonID(string FirstName)
         {
-            
+
             string Query = "SELECT ID " +
                             "FROM  people " +
                             "WHERE FirstName = @FN LIMIT 1";
@@ -201,10 +201,8 @@ namespace MalshinonProject
             }
         }
 
-
-
-
-
     }
+
 }
+
 
