@@ -44,6 +44,10 @@ namespace MalshinonProject
             int TargetID  = MalshinonDAL.GetAPersonID(FNandLN[0]);
             MalshinonDAL.AddingAReportToAIntelTable(ReporterID, TargetID, Report);
 
+            int NumReport = MalshinonDAL.GetNumReports(FN);
+            int NumMention = MalshinonDAL.GetNumMention(FNandLN[0]);
+            MalshinonDAL.IncreasingNumReportByOne(NumReport);
+            MalshinonDAL.IncreasingNumMentionByOne(NumMention);
 
 
 
@@ -122,7 +126,6 @@ namespace MalshinonProject
             List<string> FNandLN = new List<string> { FirstName, FullNameList[FullNameList.Count-1] };
             return FNandLN;
         }
-
 
         private void SetFirstName()
         {
