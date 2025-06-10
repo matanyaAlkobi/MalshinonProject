@@ -12,8 +12,8 @@ namespace MalshinonProject
         static void Main(string[] args)
         {
 
-            //Manger maneger = new Manger();
-            //maneger.Start();
+            Manger maneger = new Manger();
+            maneger.Start();
 
             //PepoleDAL p1 = new PepoleDAL();
             //Console.WriteLine( PepoleDAL.SearchForAPerson("matan", "alkobi"));
