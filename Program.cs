@@ -20,7 +20,9 @@ namespace MalshinonProject
 
             //Person ff = new Person("matan", "alkobi");
             //PepoleDAL p1 = new PepoleDAL();
+
             //PepoleDAL.AddPerson(ff);
+
 
 
         }
