@@ -31,6 +31,10 @@ namespace MalshinonProject
             {
                 MalshinonDAL.AddPerson(new Person(FNandLN[0], FNandLN[1],"Target"));
             }
+            else if (MalshinonDAL.SearchForAPerson(FNandLN[0], FNandLN[1]) %% )
+            {
+
+            }
         }
 
         // Requests information and returns the agent's name
