@@ -22,11 +22,6 @@ namespace MalshinonProject
             //PepoleDAL p1 = new PepoleDAL();
 
             //PepoleDAL.AddPerson(ff);
-
-
-
-
-
         }
     }
 
