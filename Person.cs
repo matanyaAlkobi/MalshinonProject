@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,17 +27,14 @@ namespace MalshinonProject
             }
             return builder.ToString();
         }
-
-
-        public Person(string FirstName, string LastName)
+        public Person(string FirstName, string LastName, string Type = "Reporter")
         {
             this.FirstName = FirstName;
             this.LastName = LastName;
-            this.Type = "Reporter";
+            this.Type = Type;
             this.SecretCode = RandomString(10);
 
         }
-
 
         public string GetFirstName()
         {
@@ -57,6 +55,8 @@ namespace MalshinonProject
         {
             return Type;
         }
+
+        
 
 
     }
