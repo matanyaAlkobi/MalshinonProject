@@ -14,7 +14,7 @@ namespace MalshinonProject
     internal class MalshinonDAL
     {
 
-        private readonly string connStr = "server=localhost;user=root;password=;database=Malshinon";
+        //private readonly string connStr = "server=localhost;user=root;password=;database=Malshinon";
 
         //  Method for adding a person to the people table
         public static void AddPerson(Person person)
@@ -129,40 +129,6 @@ namespace MalshinonProject
                 return -1;
             }
         }
-
-        //public static void InsertingAReportIntoATable()
-        //{
-        //    string connectionString = "Server=localhost; database=Malshinon; UID=root; password=";
-        //    try
-        //    {
-        //        using (var connection = new MySqlConnection(connectionString))
-        //        {
-        //            connection.Open();
-        //            string query = "INSERT INTO intelreports (ID, ReporterID, TargetID, Text) VALUES (@ID,@ReporterID, @TargetID, @Text)";
-        //            using (var cmd = new MySqlCommand(query, connection))
-        //            {
-
-
-        //                cmd.Parameters.AddWithValue("@ID", person.GetFirstName());
-        //                cmd.Parameters.AddWithValue("@ReporterID", person.GetLastName());
-        //                cmd.Parameters.AddWithValue("@TargetID", person.GetSecretCode());
-        //                cmd.Parameters.AddWithValue("@Text", person.GetType());
-        //                cmd.ExecuteNonQuery();
-        //            }
-        //        }
-        //        Console.WriteLine("Intel report added successfully");
-
-        //    }
-        //    catch (MySqlException ex)
-        //    {
-        //        Console.WriteLine("MySQL Error: " + ex.Message);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Console.WriteLine("General Error: " + ex.Message);
-        //    }
-
-        //}
 
 
         //  A method that displays status by name search
@@ -313,6 +279,72 @@ namespace MalshinonProject
         }
 
 
+        // A method that returns the number of mentions
+        public static int GetNumMention(string FirstName)
+        {
+
+            string Query = "SELECT NumMentions " +
+                            "FROM  people " +
+                            "WHERE FirstName = @FN LIMIT 1";
+
+            string connstring = "Server=localhost; database=Malshinon; UID=root; password=";
+            try
+            {
+                using (var connection = new MySqlConnection(connstring))
+                {
+                    connection.Open();
+                    using (var cmd = new MySqlCommand(Query, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@FN", FirstName);
+                        using (var reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                return reader.GetInt32("NumMentions");
+                            }
+                            return -1;
+                        }
+                    }
+                }
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("MySQL Error: " + ex.Message);
+                return -1;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("General Error: " + ex.Message);
+                return -1;
+            }
+        }
+
+        public static void IncreasingNumReportByOne(int NumReports)
+        {
+            string connectionString = "Server=localhost; database=Malshinon; UID=root; password=";
+            try
+            {
+                using (var connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();
+                    string query = "INSERT INTO People (NumReports) VALUES (@NumReports)";
+                    using (var cmd = new MySqlCommand(query, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@NumReports", NumReports + 1);
+                    }
+                }
+                Console.WriteLine("NumReports increased by one successfully");
+
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("MySQL Error: " + ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("General Error: " + ex.Message);
+            }
+        }
     }
     
 
