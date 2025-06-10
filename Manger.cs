@@ -42,7 +42,8 @@ namespace MalshinonProject
                 MalshinonDAL.ChangeTypeByNameSearch(FNandLN[0], "Both");
             }
             int ReporterID  = MalshinonDAL.GetAPersonID(FN);
-            int TargetID  = MalshinonDAL.GetAPersonID(FN);
+            int TargetID  = MalshinonDAL.GetAPersonID(FNandLN[0]);
+            MalshinonDAL.AddingAReportToATable(ReporterID, TargetID, Report);
 
 
         }
@@ -78,7 +79,10 @@ namespace MalshinonProject
         {
             List<string> FullNameList = new List<string>();
 
-            
+            try
+            {
+
+
                 string[] text = Report.Split(' ');
 
                 foreach (var word in text)
@@ -91,8 +95,14 @@ namespace MalshinonProject
                         }
                     }
                 }
-            
-            return FullNameList;
+
+                return FullNameList;
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex);
+                return FullNameList;
+            }
         }
 
 
@@ -104,11 +114,11 @@ namespace MalshinonProject
             {
                 return FullNameList;
             }
-            for (int i = 0; i < FullNameList.Count() - 1; i++)
+            for (int i = 0; i < FullNameList.Count- 2; i++)
             {
                 FirstName += FullNameList[i] + " ";
             }
-            List<string> FNandLN = new List<string> { FirstName, FullNameList[-1] };
+            List<string> FNandLN = new List<string> { FirstName, FullNameList[FullNameList.Count-1] };
             return FNandLN;
         }
     }
