@@ -20,17 +20,16 @@ namespace MalshinonProject
             string FN = Console.ReadLine();
             Console.WriteLine("please  enter ypur last name: ");
             string LN = Console.ReadLine();
-            if (!PepoleDAL.SearchForAPerson(FN, LN))
+            if (!MalshinonDAL.SearchForAPerson(FN, LN))
             {
-                PepoleDAL.AddPerson(new Person(FN, LN));
+                MalshinonDAL.AddPerson(new Person(FN, LN));
             }
             string Report = SetIntelReport();
             List<string> targetFullNameList = SearchForTheName(Report);
             List<string> FNandLN = ExtractsFirstNameAndLastName(targetFullNameList);
-            if (!PepoleDAL.SearchForAPerson(FNandLN[0], FNandLN[1]))
+            if (!MalshinonDAL.SearchForAPerson(FNandLN[0], FNandLN[1]))
             {
-                PepoleDAL.AddPerson(new Person(FNandLN[0], FNandLN[1],"Target"));
-
+                MalshinonDAL.AddPerson(new Person(FNandLN[0], FNandLN[1],"Target"));
             }
         }
 

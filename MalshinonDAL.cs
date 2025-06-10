@@ -9,7 +9,7 @@ using MySql.Data.MySqlClient;
 
 namespace MalshinonProject
 {
-    internal class PepoleDAL
+    internal class MalshinonDAL
     {
 
         private readonly string connStr = "server=localhost;user=root;password=;database=Malshinon";
