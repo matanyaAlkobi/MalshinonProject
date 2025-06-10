@@ -271,6 +271,48 @@ namespace MalshinonProject
                 Console.WriteLine("General Error: " + ex.Message);
             }
         }
+
+        //  A method that returns the number of reports
+        public static int GetNumReports(string FirstName)
+        {
+
+            string Query = "SELECT NumReports " +
+                            "FROM  people " +
+                            "WHERE FirstName = @FN LIMIT 1";
+
+            string connstring = "Server=localhost; database=Malshinon; UID=root; password=";
+            try
+            {
+                using (var connection = new MySqlConnection(connstring))
+                {
+                    connection.Open();
+                    using (var cmd = new MySqlCommand(Query, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@FN", FirstName);
+                        using (var reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                return reader.GetInt32("NumReports");
+                            }
+                            return -1;
+                        }
+                    }
+                }
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("MySQL Error: " + ex.Message);
+                return -1;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("General Error: " + ex.Message);
+                return -1;
+            }
+        }
+
+
     }
     
 
