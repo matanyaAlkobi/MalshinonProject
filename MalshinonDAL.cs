@@ -22,6 +22,8 @@ namespace MalshinonProject
             string connectionString = "Server=localhost; database=Malshinon; UID=root; password=";
             try
             {
+                
+
                 using (var connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
@@ -30,8 +32,8 @@ namespace MalshinonProject
                     {
 
 
-                        cmd.Parameters.AddWithValue("@FirstName", person.GetFirstName());
-                        cmd.Parameters.AddWithValue("@LastName", person.GetLastName());
+                        cmd.Parameters.AddWithValue("@FirstName", Person.MakeAFirstLetterCapital(person.GetFirstName()));
+                        cmd.Parameters.AddWithValue("@LastName", Person.MakeAFirstLetterCapital(person.GetLastName()));
                         cmd.Parameters.AddWithValue("@SecretCode", person.GetSecretCode());
                         cmd.Parameters.AddWithValue("@Type", person.GetType());
                         cmd.ExecuteNonQuery();
@@ -126,7 +128,6 @@ namespace MalshinonProject
                 return -1;
             }
         }
-
 
         //public static void InsertingAReportIntoATable()
         //{
