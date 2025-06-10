@@ -43,7 +43,9 @@ namespace MalshinonProject
             }
             int ReporterID  = MalshinonDAL.GetAPersonID(FN);
             int TargetID  = MalshinonDAL.GetAPersonID(FNandLN[0]);
-            MalshinonDAL.AddingAReportToATable(ReporterID, TargetID, Report);
+            MalshinonDAL.AddingAReportToAIntelTable(ReporterID, TargetID, Report);
+
+
 
 
         }
