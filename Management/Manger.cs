@@ -161,7 +161,7 @@ namespace MalshinonProject
         {
             do
             {
-                Console.WriteLine("Enter Your first name: ");
+                Console.WriteLine("Enter Your last name: ");
                 this.ReporterLN = Console.ReadLine();
                 if (ReporterLN == "")
                 {
