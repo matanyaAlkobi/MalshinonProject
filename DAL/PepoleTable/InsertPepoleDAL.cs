@@ -25,10 +25,10 @@ namespace MalshinonProject
                     {
 
 
-                        cmd.Parameters.AddWithValue("@FirstName", Person.MakeAFirstLetterCapital(person.GetFirstName()));
-                        cmd.Parameters.AddWithValue("@LastName", Person.MakeAFirstLetterCapital(person.GetLastName()));
-                        cmd.Parameters.AddWithValue("@SecretCode", person.GetSecretCode());
-                        cmd.Parameters.AddWithValue("@Type", person.GetType());
+                        cmd.Parameters.AddWithValue("@FirstName", Person.MakeAFirstLetterCapital(person.FirstName));
+                        cmd.Parameters.AddWithValue("@LastName", Person.MakeAFirstLetterCapital(person.LastName));
+                        cmd.Parameters.AddWithValue("@SecretCode", person.SecretCode);
+                        cmd.Parameters.AddWithValue("@Type", person.Type);
                         int Execution = cmd.ExecuteNonQuery();  // צריך  לטפל
 
                     }
