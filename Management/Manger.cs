@@ -8,6 +8,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
+using MalshinonProject.DAL.IntelReportsTable;
 using MalshinonProject.Management;
 using Org.BouncyCastle.Crypto;
 
@@ -22,50 +23,49 @@ namespace MalshinonProject
         {
             SetFirstName();
             SetLastName();
-            if (!MalshinonDAL.SearchForAPerson(FN, LN))
+            if (!PepoleDAL.SearchForAPerson(FN, LN))
             {
-                InsertMalshinonDAL.AddPerson(new Person(FN, LN));
+                InsertPepoleDAL.AddPerson(new Person(FN, LN));
             }
-            else if (GetMalshinonDAl.GetTypeByName(FN) == "Targt")
+            else if (GetPepoleDAL.GetTypeByName(FN) == "Targt")
             {
-                UpdateMalshinonDAL.ChangeTypeByNameSearch(FN,"Both");
+                UpdatePepoleDAL.ChangeTypeByNameSearch(FN,"Both");
             }
 
             string Report = SetIntelReport();
             List<string> targetFullNameList = SearchForTheName(Report);
             List<string> FNandLN = ExtractsFirstNameAndLastName(targetFullNameList);
 
-            if (!MalshinonDAL.SearchForAPerson(FNandLN[0], FNandLN[1]))
+            if (!PepoleDAL.SearchForAPerson(FNandLN[0], FNandLN[1]))
             {
-                InsertMalshinonDAL.AddPerson(new Person(FNandLN[0], FNandLN[1], "Target"));
+                InsertPepoleDAL.AddPerson(new Person(FNandLN[0], FNandLN[1], "Target"));
             }
-            else if (GetMalshinonDAl.GetTypeByName(FNandLN[0]) == "Reporter")
+            else if (GetPepoleDAL.GetTypeByName(FNandLN[0]) == "Reporter")
             {
-                UpdateMalshinonDAL.ChangeTypeByNameSearch(FNandLN[0], "Both");
+                UpdatePepoleDAL.ChangeTypeByNameSearch(FNandLN[0], "Both");
             }
 
-            int ReporterID  = GetMalshinonDAl.GetAPersonID(FN);
-            int TargetID  = GetMalshinonDAl.GetAPersonID(FNandLN[0]);
-            InsertMalshinonDAL.AddingAReportToAIntelTable(ReporterID, TargetID, Report);
+            int ReporterID  = GetPepoleDAL.GetAPersonID(FN);
+            int TargetID  = GetPepoleDAL.GetAPersonID(FNandLN[0]);
+            InsertIntelRepotrsDAL.AddingAReportToAIntelTable(ReporterID, TargetID, Report);
 
-            int NumReport = GetMalshinonDAl.GetNumReports(FN);
-            int NumMention = GetMalshinonDAl.GetNumMention(FNandLN[0]);
-            UpdateMalshinonDAL.IncreasingNumReportByOne(NumReport, FN);
-            UpdateMalshinonDAL.IncreasingNumMentionByOne(NumMention, FNandLN[0]);
+            int NumReport = GetPepoleDAL.GetNumReports(FN);
+            int NumMention = GetPepoleDAL.GetNumMention(FNandLN[0]);
+            UpdatePepoleDAL.IncreasingNumReportByOne(NumReport, FN);
+            UpdatePepoleDAL.IncreasingNumMentionByOne(NumMention, FNandLN[0]);
 
-            var LengthAndNum = GetMalshinonDAl.GetLengthAndNumReport(ReporterID);
+            var LengthAndNum = GetIntelReportDAL.GetLengthAndNumReport(ReporterID);
             double avg = Calculator.GetAverage(LengthAndNum.CharacterIength, LengthAndNum.NumReport);
             if(LengthAndNum.NumReport >=  10 && avg >= 100)
             {
                 Console.WriteLine($"This {FN} is a potential agent.");
-                UpdateMalshinonDAL.ChangeTypeByNameSearch(FN, "PotentialAgent");
+                UpdatePepoleDAL.ChangeTypeByNameSearch(FN, "PotentialAgent");
             }
             if(NumMention >= 20)
             {
                 Console.WriteLine($"Warning: {FNandLN[0]} is a potential threat.");
             }
 
-            
         }
 
 

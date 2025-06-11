@@ -7,7 +7,7 @@ using MySql.Data.MySqlClient;
 
 namespace MalshinonProject
 {
-    internal class UpdateMalshinonDAL
+    internal class UpdatePepoleDAL
     {
 
         //  A method that changes the person's type based on a name search

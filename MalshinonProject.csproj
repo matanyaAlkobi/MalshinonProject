@@ -95,19 +95,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DAL\GetMalshinonDAl.cs" />
-    <Compile Include="DAL\InsertMalshinonDAL.cs" />
+    <Compile Include="DAL\PepoleTable\GetPepoleDAL.cs" />
+    <Compile Include="DAL\IntelReportsTable\GetIntelReportDAL.cs" />
+    <Compile Include="DAL\PepoleTable\InsertPepoleDAL.cs" />
+    <Compile Include="DAL\IntelReportsTable\InsertIntelRepotrsDAL.cs" />
     <Compile Include="Management\Calculator.cs" />
     <Compile Include="Management\Manger.cs" />
-    <Compile Include="DAL\MalshinonDAL.cs" />
+    <Compile Include="DAL\PepoleTable\PepoleDAL.cs" />
     <Compile Include="Entities\Person.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="DAL\UpdateMalshinonDAL.cs" />
+    <Compile Include="DAL\PepoleTable\UpdatePepoleDAL.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

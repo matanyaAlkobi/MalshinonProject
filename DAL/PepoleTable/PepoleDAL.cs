@@ -11,7 +11,7 @@ using MySql.Data.MySqlClient;
 
 namespace MalshinonProject
 {
-    internal class MalshinonDAL
+    internal class PepoleDAL
     {
 
         //private readonly string connStr = "server=localhost;user=root;password=;database=Malshinon";
