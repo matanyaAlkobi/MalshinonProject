@@ -60,6 +60,10 @@ namespace MalshinonProject
                 Console.WriteLine($"This {FN} is a potential agent.");
                 UpdateMalshinonDAL.ChangeTypeByNameSearch(FN, "PotentialAgent");
             }
+            if(NumMention >= 20)
+            {
+                Console.WriteLine($"Warning: {FNandLN[0]} is a potential threat.");
+            }
 
             
         }
