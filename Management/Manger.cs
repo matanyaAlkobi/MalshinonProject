@@ -1,20 +1,22 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Runtime.ExceptionServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
+using MalshinonProject.Management;
 using Org.BouncyCastle.Crypto;
 
 namespace MalshinonProject
 {
     internal class Manger
     {
-        private string FN;
-        string LN;
+        private  string FN;
+        string  LN;
         // System activation
         public void Start()
         {
@@ -32,6 +34,7 @@ namespace MalshinonProject
             string Report = SetIntelReport();
             List<string> targetFullNameList = SearchForTheName(Report);
             List<string> FNandLN = ExtractsFirstNameAndLastName(targetFullNameList);
+
             if (!MalshinonDAL.SearchForAPerson(FNandLN[0], FNandLN[1]))
             {
                 InsertMalshinonDAL.AddPerson(new Person(FNandLN[0], FNandLN[1], "Target"));
@@ -40,6 +43,7 @@ namespace MalshinonProject
             {
                 UpdateMalshinonDAL.ChangeTypeByNameSearch(FNandLN[0], "Both");
             }
+
             int ReporterID  = GetMalshinonDAl.GetAPersonID(FN);
             int TargetID  = GetMalshinonDAl.GetAPersonID(FNandLN[0]);
             InsertMalshinonDAL.AddingAReportToAIntelTable(ReporterID, TargetID, Report);
@@ -47,13 +51,18 @@ namespace MalshinonProject
             int NumReport = GetMalshinonDAl.GetNumReports(FN);
             int NumMention = GetMalshinonDAl.GetNumMention(FNandLN[0]);
             UpdateMalshinonDAL.IncreasingNumReportByOne(NumReport, FN);
-            UpdateMalshinonDAL.IncreasingNumMentionByOne(NumMention, FN);
+            UpdateMalshinonDAL.IncreasingNumMentionByOne(NumMention, FNandLN[0]);
 
+            var LengthAndNum = GetMalshinonDAl.GetLengthAndNumReport(ReporterID);
+            double avg = Calculator.GetAverage(LengthAndNum.CharacterIength, LengthAndNum.NumReport);
+            if(LengthAndNum.NumReport >=  10 && avg >= 100)
+            {
+                Console.WriteLine($"This {FN} is a potential agent.");
+                UpdateMalshinonDAL.ChangeTypeByNameSearch(FN, "PotentialAgent");
+            }
 
-
+            
         }
-
-
 
 
         // Requests information and returns the agent's name
@@ -74,9 +83,8 @@ namespace MalshinonProject
             }
             while (SearchForTheName(Report).Count() < 2);
             return Report;
-
-
         }
+
 
         // Search ad for a person's name in uppercase letters
         // Returns a list of first and last names
@@ -123,7 +131,7 @@ namespace MalshinonProject
             {
                 FirstName += FullNameList[i] + " ";
             }
-            List<string> FNandLN = new List<string> { FirstName, FullNameList[FullNameList.Count-1] };
+                List<string> FNandLN = new List<string> { FirstName, FullNameList[FullNameList.Count - 1] };
             return FNandLN;
         }
 
@@ -142,6 +150,7 @@ namespace MalshinonProject
 
             }
             while (FN == "");
+            //FN = Person.MakeAFirstLetterCapital(FN);
         }
 
         private void SetLastName()
@@ -159,6 +168,7 @@ namespace MalshinonProject
 
             }
             while (LN == "");
+            //FN = Person.MakeAFirstLetterCapital(LN);
         }
     }
 }
