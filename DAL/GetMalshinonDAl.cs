@@ -176,6 +176,7 @@ namespace MalshinonProject
         }
 
 
+        //  Returns a tuple of the length of the label and the number of reports.
         public static (int NumReport, int CharacterIength) GetLengthAndNumReport(int ReporterID)
         {
             int NumReport = 0;
