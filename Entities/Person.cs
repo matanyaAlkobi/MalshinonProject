@@ -16,7 +16,7 @@ namespace MalshinonProject
         string SecretCode;
         string Type;
 
-        private string RandomString(int size)
+        private static string RandomString(int size)
         {
             StringBuilder builder = new StringBuilder();
             Random random = new Random();
@@ -59,6 +59,8 @@ namespace MalshinonProject
 
         public static string MakeAFirstLetterCapital(string text)
         {
+            text.Trim();
+            text.TrimEnd();
             text.ToLower();
             char FirstLetterUpper = char.ToUpper(text[0]);
             string NewText = FirstLetterUpper.ToString() + text.Substring(1);

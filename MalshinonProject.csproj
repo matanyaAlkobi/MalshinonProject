@@ -97,6 +97,7 @@
   <ItemGroup>
     <Compile Include="DAL\GetMalshinonDAl.cs" />
     <Compile Include="DAL\InsertMalshinonDAL.cs" />
+    <Compile Include="Management\Calculator.cs" />
     <Compile Include="Management\Manger.cs" />
     <Compile Include="DAL\MalshinonDAL.cs" />
     <Compile Include="Entities\Person.cs" />
