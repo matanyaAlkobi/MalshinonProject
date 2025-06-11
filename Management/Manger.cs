@@ -22,11 +22,11 @@ namespace MalshinonProject
             SetLastName();
             if (!MalshinonDAL.SearchForAPerson(FN, LN))
             {
-                MalshinonDAL.AddPerson(new Person(FN, LN));
+                InsertMalshinonDAL.AddPerson(new Person(FN, LN));
             }
-            else if (MalshinonDAL.GetTypeByName(FN) == "Targt")
+            else if (GetMalshinonDAl.GetTypeByName(FN) == "Targt")
             {
-                MalshinonDAL.ChangeTypeByNameSearch(FN,"Both");
+                UpdateMalshinonDAL.ChangeTypeByNameSearch(FN,"Both");
             }
 
             string Report = SetIntelReport();
@@ -34,20 +34,20 @@ namespace MalshinonProject
             List<string> FNandLN = ExtractsFirstNameAndLastName(targetFullNameList);
             if (!MalshinonDAL.SearchForAPerson(FNandLN[0], FNandLN[1]))
             {
-                MalshinonDAL.AddPerson(new Person(FNandLN[0], FNandLN[1], "Target"));
+                InsertMalshinonDAL.AddPerson(new Person(FNandLN[0], FNandLN[1], "Target"));
             }
-            else if (MalshinonDAL.GetTypeByName(FNandLN[0]) == "Reporter")
+            else if (GetMalshinonDAl.GetTypeByName(FNandLN[0]) == "Reporter")
             {
-                MalshinonDAL.ChangeTypeByNameSearch(FNandLN[0], "Both");
+                UpdateMalshinonDAL.ChangeTypeByNameSearch(FNandLN[0], "Both");
             }
-            int ReporterID  = MalshinonDAL.GetAPersonID(FN);
-            int TargetID  = MalshinonDAL.GetAPersonID(FNandLN[0]);
-            MalshinonDAL.AddingAReportToAIntelTable(ReporterID, TargetID, Report);
+            int ReporterID  = GetMalshinonDAl.GetAPersonID(FN);
+            int TargetID  = GetMalshinonDAl.GetAPersonID(FNandLN[0]);
+            InsertMalshinonDAL.AddingAReportToAIntelTable(ReporterID, TargetID, Report);
 
-            int NumReport = MalshinonDAL.GetNumReports(FN);
-            int NumMention = MalshinonDAL.GetNumMention(FNandLN[0]);
-            MalshinonDAL.IncreasingNumReportByOne(NumReport);
-            MalshinonDAL.IncreasingNumMentionByOne(NumMention);
+            int NumReport = GetMalshinonDAl.GetNumReports(FN);
+            int NumMention = GetMalshinonDAl.GetNumMention(FNandLN[0]);
+            UpdateMalshinonDAL.IncreasingNumReportByOne(NumReport, FN);
+            UpdateMalshinonDAL.IncreasingNumMentionByOne(NumMention, FN);
 
 
 

@@ -95,11 +95,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Manger.cs" />
-    <Compile Include="MalshinonDAL.cs" />
-    <Compile Include="Person.cs" />
+    <Compile Include="DAL\GetMalshinonDAl.cs" />
+    <Compile Include="DAL\InsertMalshinonDAL.cs" />
+    <Compile Include="Management\Manger.cs" />
+    <Compile Include="DAL\MalshinonDAL.cs" />
+    <Compile Include="Entities\Person.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="DAL\UpdateMalshinonDAL.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
