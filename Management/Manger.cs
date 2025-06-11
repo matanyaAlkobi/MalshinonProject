@@ -16,8 +16,9 @@ namespace MalshinonProject
 {
     internal class Manger
     {
-        private  string ReporterFN;
-        string  ReporterLN;
+        string ReporterFN;
+        string ReporterLN;
+
         // System activation
         public void Start()
         {
@@ -154,7 +155,6 @@ namespace MalshinonProject
 
             }
             while (ReporterFN == "");
-            ReporterFN = Person.MakeAFirstLetterCapital(ReporterFN);
         }
 
         private void SetLastName()
@@ -172,7 +172,7 @@ namespace MalshinonProject
 
             }
             while (ReporterLN == "");
-            ReporterLN = Person.MakeAFirstLetterCapital(ReporterLN);
+            
         }
     }
 }

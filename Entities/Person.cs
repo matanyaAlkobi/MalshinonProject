@@ -11,10 +11,14 @@ namespace MalshinonProject
 {
     internal class Person
     {
-        string FirstName;
-        string LastName;
-        string SecretCode;
-        string Type;
+        public int ID { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string SecretCode { get; set; }
+        public string Type { get; set; }
+        public int NumReport { get; set; }
+        public int NumMention { get; set; }
+
 
         private static string RandomString(int size)
         {
@@ -34,28 +38,27 @@ namespace MalshinonProject
             this.LastName = LastName;
             this.Type = Type;
             this.SecretCode = RandomString(10);
-
         }
 
-        public string GetFirstName()
-        {
-            return FirstName;
-        }
+        //public string GetFirstName()
+        //{
+        //    return FirstName;
+        //}
 
-        public string GetLastName()
-        {
-            return LastName;
-        }
+        //public string GetLastName()
+        //{
+        //    return LastName;
+        //}
 
-        public string GetSecretCode()
-        {
-            return SecretCode;
-        }
+        //public string GetSecretCode()
+        //{
+        //    return SecretCode;
+        //}
 
-        public new string GetType()
-        {
-            return Type;
-        }
+        //public new string GetType()
+        //{
+        //    return Type;
+        //}
 
         public static string MakeAFirstLetterCapital(string text)
         {

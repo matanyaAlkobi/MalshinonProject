@@ -7,6 +7,7 @@ using MySql.Data.MySqlClient;
 
 namespace MalshinonProject
 {
+
     internal class UpdatePepoleDAL
     {
 
