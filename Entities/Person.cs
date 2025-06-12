@@ -15,6 +15,8 @@ namespace MalshinonProject
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string SecretCode { get; set; }
+
+
         public string Type { get; set; }
         public int NumReport { get; set; }
         public int NumMention { get; set; }
@@ -32,12 +34,27 @@ namespace MalshinonProject
             }
             return builder.ToString();
         }
+
+
         public Person(string FirstName, string LastName, string Type = "Reporter")
         {
             this.FirstName = FirstName;
             this.LastName = LastName;
             this.Type = Type;
             this.SecretCode = RandomString(10);
+        }
+
+
+        public Person(int ID, string FirstName, string LastName, string SecretCode, string Type, int NumReport, int NumMention)
+        {
+            {
+                this.FirstName = FirstName;
+                this.LastName = LastName;
+                this.SecretCode = SecretCode;
+                this.Type = Type;
+                this.NumReport = NumReport;
+                this.NumMention = NumMention;
+            }
         }
 
         //public string GetFirstName()
@@ -69,7 +86,12 @@ namespace MalshinonProject
             string NewText = FirstLetterUpper.ToString() + text.Substring(1);
             return NewText;
         }
-        
+
+
+        public override string ToString()
+        {
+            return $"ID: {ID} FirstName: {FirstName} LastName: {LastName} SecretCode: {SecretCode} Type: {Type} NumReport: {NumReport} NumMention: {NumMention}";
+        }
 
     }
 

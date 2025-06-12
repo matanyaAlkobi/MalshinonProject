@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
-
 namespace MalshinonProject
 {
     internal class GetPepoleDAL
     {
+
         //  A method that displays status by name search
         public static string GetTypeByName(string FirstName)
         {
@@ -176,6 +176,55 @@ namespace MalshinonProject
         }
 
 
-        
+        public static List<Person> GetAllPepole()
+        {
+
+            List<Person> AllPersons = new List<Person>();
+            string Query = "SELECT * " +
+                            "FROM  people ";
+
+            string connstring = "Server=localhost; database=Malshinon; UID=root; password=";
+            try
+            {
+                using (var connection = new MySqlConnection(connstring))
+                {
+                    connection.Open();
+                    using (var cmd = new MySqlCommand(Query, connection))
+                    {
+                        using (var reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                int ID = reader.GetInt32("ID") != null ? reader.GetInt32("ID") : 0;
+                                string FirstName = reader.GetString("FirstName") != null ? reader.GetString("FirstName") : "";
+                                string LastName = reader.GetString("LastName") != null ? reader.GetString("LastName") : "";
+                                string SecretCode = reader.GetString("SecretCode") != null ? reader.GetString("SecretCode") : "";
+                                string Type = reader.GetString("Type") != null ? reader.GetString("Type") : "";
+                                int NumReport = reader.GetInt32("NumReports") != null ? reader.GetInt32("NumReports") : 0;
+                                int NumMention = reader.GetInt32("NumMentions") != null ? reader.GetInt32("NumMentions") : 0;
+                                AllPersons.Add(new Person(ID, FirstName, LastName, SecretCode, Type, NumReport, NumMention));
+                            }
+                            Console.WriteLine("Get all pepole succeeded!");
+                        }
+                    }
+                }
+                return AllPersons;
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("MySQL Error: " + ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("General Error: " + ex.Message);
+            }
+            return AllPersons;
+        }
+
+
+
+
+
     }
 }
+

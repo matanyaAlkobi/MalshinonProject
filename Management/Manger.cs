@@ -16,51 +16,59 @@ namespace MalshinonProject
 {
     internal class Manger
     {
-        string ReporterFN;
-        string ReporterLN;
+        
+ 
+
 
         // System activation
         public void Start()
         {
-            SetFirstName();
-            SetLastName();
-            if (!PepoleDAL.SearchForAPerson(ReporterFN, ReporterLN))
+            string FirstName = SetFirstName();
+            string LastName = SetLastName();
+            Person ReporterPerson = new Person(FirstName, LastName);
+
+            if (!PepoleDAL.SearchForAPerson(ReporterPerson.FirstName, ReporterPerson.LastName))
             {
-                InsertPepoleDAL.AddPerson(new Person(ReporterFN, ReporterLN));
+                InsertPepoleDAL.AddPerson(ReporterPerson);
             }
-            else if (GetPepoleDAL.GetTypeByName(ReporterFN) == "Targt")
+            else if (GetPepoleDAL.GetTypeByName(ReporterPerson.FirstName) == "Targt")
             {
-                UpdatePepoleDAL.ChangeTypeByNameSearch(ReporterFN, "Both");
+                UpdatePepoleDAL.ChangeTypeByNameSearch(ReporterPerson.FirstName, "Both");
             }
 
             string Report = SetIntelReport();
             List<string> targetFullNameList = SearchForTheName(Report);
             List<string> TargetFNandLN = ExtractsFirstNameAndLastName(targetFullNameList);
 
+            string TargetFirstName = TargetFNandLN[0];
+            string TargetLastName = TargetFNandLN[1];
+            string TargetType = "Target";
+            Person TargetPerson = new Person(TargetFirstName, TargetLastName, TargetType);
+
             if (!PepoleDAL.SearchForAPerson(TargetFNandLN[0], TargetFNandLN[1]))
             {
-                InsertPepoleDAL.AddPerson(new Person(TargetFNandLN[0], TargetFNandLN[1], "Target"));
+                InsertPepoleDAL.AddPerson(TargetPerson);
             }
             else if (GetPepoleDAL.GetTypeByName(TargetFNandLN[0]) == "Reporter")
             {
                 UpdatePepoleDAL.ChangeTypeByNameSearch(TargetFNandLN[0], "Both");
             }
 
-            int ReporterID  = GetPepoleDAL.GetAPersonID(ReporterFN);
+            int ReporterID  = GetPepoleDAL.GetAPersonID(ReporterPerson.FirstName);
             int TargetID  = GetPepoleDAL.GetAPersonID(TargetFNandLN[0]);
             InsertIntelRepotrsDAL.AddingAReportToAIntelTable(ReporterID, TargetID, Report);
 
-            int NumReport = GetPepoleDAL.GetNumReports(ReporterFN);
+            int NumReport = GetPepoleDAL.GetNumReports(ReporterPerson.FirstName);
             int NumMention = GetPepoleDAL.GetNumMention(TargetFNandLN[0]);
-            UpdatePepoleDAL.IncreasingNumReportByOne(NumReport, ReporterFN);
+            UpdatePepoleDAL.IncreasingNumReportByOne(NumReport, ReporterPerson.FirstName);
             UpdatePepoleDAL.IncreasingNumMentionByOne(NumMention, TargetFNandLN[0]);
 
             var LengthAndNum = GetIntelReportDAL.GetLengthAndNumReport(ReporterID);
             double avg = Calculator.GetAverage(LengthAndNum.CharacterIength, LengthAndNum.NumReport);
             if(LengthAndNum.NumReport >=  10 && avg >= 100)
             {
-                Console.WriteLine($"This {ReporterFN} is a potential agent.");
-                UpdatePepoleDAL.ChangeTypeByNameSearch(ReporterFN, "PotentialAgent");
+                Console.WriteLine($"This {ReporterPerson.FirstName} is a potential agent.");
+                UpdatePepoleDAL.ChangeTypeByNameSearch(ReporterPerson.FirstName, "PotentialAgent");
             }
             if(NumMention >= 20)
             {
@@ -140,12 +148,13 @@ namespace MalshinonProject
             return TargetFNandLN;
         }
 
-        private void SetFirstName()
+        private string SetFirstName()
         {
+            string ReporterFN;
             do
             {
                 Console.WriteLine("Enter Your first name: ");
-                this.ReporterFN = Console.ReadLine();
+                ReporterFN = Console.ReadLine();
                 if(ReporterFN == "")
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
@@ -155,14 +164,16 @@ namespace MalshinonProject
 
             }
             while (ReporterFN == "");
+            return ReporterFN;
         }
 
-        private void SetLastName()
+        private string SetLastName()
         {
+            string ReporterLN;
             do
             {
                 Console.WriteLine("Enter Your last name: ");
-                this.ReporterLN = Console.ReadLine();
+                ReporterLN = Console.ReadLine();
                 if (ReporterLN == "")
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
@@ -172,7 +183,7 @@ namespace MalshinonProject
 
             }
             while (ReporterLN == "");
-            
+            return ReporterLN;
         }
     }
 }
