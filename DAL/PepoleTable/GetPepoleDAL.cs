@@ -175,7 +175,7 @@ namespace MalshinonProject
             }
         }
 
-
+        // Returns all people table in a list
         public static List<Person> GetAllPepole()
         {
 
