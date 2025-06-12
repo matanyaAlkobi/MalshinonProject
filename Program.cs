@@ -4,6 +4,8 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using MalshinonProject.DAL.IntelReportsTable;
+using MalshinonProject.Entities;
 
 namespace MalshinonProject
 {
@@ -16,7 +18,7 @@ namespace MalshinonProject
             //maneger.Start();
 
 
-            List<Person> hghg = GetPepoleDAL.GetAllPepole();
+            List<IntelReprt> hghg = GetIntelReportDAL.GetAllIntelReports();
             foreach(var item in hghg)
             {
                 Console.WriteLine(item);
