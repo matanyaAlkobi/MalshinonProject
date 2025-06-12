@@ -99,6 +99,7 @@
     <Compile Include="DAL\IntelReportsTable\GetIntelReportDAL.cs" />
     <Compile Include="DAL\PepoleTable\InsertPepoleDAL.cs" />
     <Compile Include="DAL\IntelReportsTable\InsertIntelRepotrsDAL.cs" />
+    <Compile Include="Entities\IntelReprt.cs" />
     <Compile Include="Management\Calculator.cs" />
     <Compile Include="Management\Manger.cs" />
     <Compile Include="DAL\PepoleTable\PepoleDAL.cs" />
