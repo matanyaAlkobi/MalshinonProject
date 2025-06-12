@@ -12,16 +12,15 @@ namespace MalshinonProject
         static void Main(string[] args)
         {
 
-            Manger maneger = new Manger();
-            maneger.Start();
+            //Manger maneger = new Manger();
+            //maneger.Start();
 
-            //PepoleDAL p1 = new PepoleDAL();
-            //Console.WriteLine( PepoleDAL.SearchForAPerson("matan", "alkobi"));
 
-            //Person ff = new Person("matan", "alkobi");
-            //PepoleDAL p1 = new PepoleDAL();
-
-            //PepoleDAL.AddPerson(ff);
+            List<Person> hghg = GetPepoleDAL.GetAllPepole();
+            foreach(var item in hghg)
+            {
+                Console.WriteLine(item);
+            }
         }
     }
 
